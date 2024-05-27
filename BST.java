@@ -1,21 +1,31 @@
 public class BST {
 
-    private void insertNode(Node root, Node newNode) {
+    private final BinaryTree bsttree;
+
+    public BST(BinaryTree binaryTree) {
+        this.bsttree = binaryTree;
+    }
+
+    public void setRoot(Node root) {
+        bsttree.setRoot(root);
+    }
+
+    private void insertNodeBST(Node root, Node newNode) {
         if (root == null) {
-            return; // Ponto de parada: chegou a um nó nulo, não há mais nada para fazer
+            return;
         }
 
         if (newNode.getToken().getId() < root.getToken().getId()) {
             if (root.getLeft() == null) {
                 root.setLeft(newNode);
             } else {
-                insertNode(root.getLeft(), newNode); // Chamada recursiva
+                insertNodeBST(root.getLeft(), newNode);
             }
         } else if (newNode.getToken().getId() > root.getToken().getId()) {
             if (root.getRight() == null) {
                 root.setRight(newNode);
             } else {
-                insertNode(root.getRight(), newNode); // Chamada recursiva
+                insertNodeBST(root.getRight(), newNode);
             }
         } else {
             // O novo nó já existe na árvore, não é necessário inserir novamente
@@ -24,7 +34,7 @@ public class BST {
     }
 
     public void insert(Node root, Node newNode) {
-        insertNode(root, newNode);
+        insertNodeBST(root, newNode);
     }
 
     public Node delete(Node root, int id) {
