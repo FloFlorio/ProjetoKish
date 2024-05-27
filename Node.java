@@ -3,15 +3,19 @@ public class Node {
     private Node parent;
     private Node right;
     private Node left;
+    private final Node root;
     private int balanceFactor;
     private int id;
+    private String data;
 
     public Node(Token token) {
         this.token = token;
         right = null;
         left = null;
+        root = null;
         parent = null;
         balanceFactor = 0;
+        this.data = data;
     }
 
     public Node setRight(Node right) {
@@ -54,6 +58,9 @@ public class Node {
     public String getValue() {
         return token.getValue();
     }
+    public Node getRoot() {
+        return root;
+    }
 
     private boolean hasBothNodes() {
         if (getRight() != null && getLeft() != null) {
@@ -62,8 +69,11 @@ public class Node {
             return false;
         }
     }
+    public boolean isRoot() {
+        return this.parent == null;
+    }
 
-    private boolean isLeaf() {
+    public boolean isLeaf() {
         if (getRight() == null && getLeft() == null) {
             return true;
         } else {
@@ -102,30 +112,38 @@ public class Node {
     public void setToken(Token token){
         this.token = token;
     }
-
-
-    public int getDegree() {
-        if (isLeaf() == true) {
-            return -1;
-        } else if (hasBothNodes() == true) {
-            return 2;
-        } else {
-            return 1;
+    public int getNodeDegree(Node node) {
+        if (node == null) {
+            return 0;
         }
+
+        int degree = 0;
+
+        if(isLeaf()){
+            return 0;
+        }
+        if (node.getLeft() != null) {
+            degree++;
+        }
+        if (node.getRight() != null) {
+            degree++;
+        }
+        return degree;
     }
 
-    public int getHeight() {
-        if (isLeaf() == true) {
+    public int getLevel(Node node, int level) {
+        if (node == null) {
             return 0;
-        } else if (right == null && left != null) {
-            return 1 + left.getHeight();
-        } else if (right != null && left == null) {
-            return 1 + right.getHeight();
-        } else if (right.getHeight() >= left.getHeight()) {
-            return 1 + right.getHeight();
-        } else {
-            return 1 + left.getHeight();
         }
+        if (node.getValue().equals(this.token.getValue())) {
+            return level;
+        }
+        int downlevel = getLevel(node.getLeft(), level + 1);
+        if (downlevel != 0) {
+            return downlevel;
+        }
+        downlevel = getLevel(node.getRight(), level + 1);
+        return downlevel;
     }
 
     @Override
