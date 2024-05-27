@@ -135,7 +135,7 @@ public class Node {
         if (node == null) {
             return 0;
         }
-        if (node.getValue().equals(data)) {
+        if (node.getValue().equals(this.token.getValue())) {
             return level;
         }
         int downlevel = getLevel(node.getLeft(), level + 1);
