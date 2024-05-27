@@ -192,6 +192,11 @@ public class BinaryTree {
         printChildNodeInfo(node.getLeft());
         System.out.println("Right:");
         printChildNodeInfo(node.getRight());
+        System.out.println("    é folha? " + node.isLeaf());
+        System.out.println("    é raiz? " + node.isRoot());
+        System.out.println("    grau:" + node.getNodeDegree(this.root));
+        System.out.println("    nivel:" + node.getLevel(this.root, 0));
+        System.out.println("    Altura:" + node.getNodeHeight(node, 0));
         System.out.println();
     }
 
@@ -205,5 +210,6 @@ public class BinaryTree {
             System.out.println("  null");
         }
     }
+
 }
 
