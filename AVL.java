@@ -33,15 +33,6 @@ public class AVL {
         }
     }
 
-    public void insert(Node root, Node newNode) {
-        insertNodeAVL(root, newNode);
-
-    }
-
-    public Node delete(Node root, int id) {
-        return deleteNode(root, id);
-    }
-
     private Node deleteNode(Node root, int id) {
         if(root == null){return root;}
         // Se o id a ser deletado é menor do que a raiz, vá para a subárvore esquerda
