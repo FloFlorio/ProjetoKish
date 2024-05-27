@@ -3,6 +3,7 @@ public class Node {
     private Node parent;
     private Node right;
     private Node left;
+    private final Node root;
     private int balanceFactor;
     private int id;
     private String data;
@@ -11,6 +12,7 @@ public class Node {
         this.token = token;
         right = null;
         left = null;
+        root = null;
         parent = null;
         balanceFactor = 0;
         this.data = data;
@@ -55,6 +57,9 @@ public class Node {
 
     public String getValue() {
         return token.getValue();
+    }
+    public Node getRoot() {
+        return root;
     }
 
     private boolean hasBothNodes() {
