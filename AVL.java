@@ -1,31 +1,31 @@
 public class AVL {
 
-    private final BinaryTree binaryTree;
+    private final BinaryTree avltree;
 
     public AVL(BinaryTree binaryTree) {
-        this.binaryTree = binaryTree;
+        this.avltree = binaryTree;
     }
 
     public void setRoot(Node root) {
-        binaryTree.setRoot(root);
+        avltree.setRoot(root);
     }
 
-    private void insertNode(Node root, Node newNode) {
+    private void insertNodeAVL(Node root, Node newNode) {
         if (root == null) {
-            return; // Ponto de parada: chegou a um nó nulo, não há mais nada para fazer
+            return; 
         }
 
         if (newNode.getToken().getId() < root.getToken().getId()) {
             if (root.getLeft() == null) {
                 root.setLeft(newNode);
             } else {
-                insertNode(root.getLeft(), newNode);
+                insertNodeAVL(root.getLeft(), newNode);
             }
         } else if (newNode.getToken().getId() > root.getToken().getId()) {
             if (root.getRight() == null) {
                 root.setRight(newNode);
             } else {
-                insertNode(root.getRight(), newNode);
+                insertNodeAVL(root.getRight(), newNode);
             }
         } else {
             // O novo nó já existe na árvore, não é necessário inserir novamente
@@ -34,7 +34,7 @@ public class AVL {
     }
 
     public void insert(Node root, Node newNode) {
-        insertNode(root, newNode);
+        insertNodeAVL(root, newNode);
 
     }
 
@@ -91,19 +91,19 @@ public class AVL {
         }
     }
     public void insertBalance(Node root, Node newNode) {
-        insertNode(root, newNode);
-        binaryTree.balance(root);
+        insertNodeAVL(root, newNode);
+        avltree.balance(root);
     }
 
     public Node deleteBalance(Node root, int id) {
         Node newRoot = deleteNode(root, id);
-        binaryTree.balance(newRoot);
+        avltree.balance(newRoot);
         return newRoot;
     }
 
     public void updateBalance(Node root, int id, String newValue) {
         updateNodeValue(root, id, newValue);
-        binaryTree.balance(root);
+        avltree.balance(root);
     }
 
     private Node nodeSucessor(Node node) {
